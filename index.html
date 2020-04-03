@@ -8,18 +8,22 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <div id="app">
-
+        <h1 v-once>{{ title }}</h1>
         <input type="text" v-on:input="changeTitle">
         <p> {{ sayHello() }} - <a v-bind:href="link">Google</a></p>
-
+        <hr>
+        輸出html:<br>
+        錯誤用法<p>{{ finishedLink }}</p>
+        正確用法<p v-html="finishedLink"></p>
     </div>
 
     <script>
         new Vue({
-            el: "#app",
+            el: '#app',
             data: {
-                title: "Hello World!",
-                link: "http://google.com"
+                title: 'Hello World!',
+                link: 'http://google.com',
+                finishedLink: '<a href="http://google.com">Google</a>'
             },
             methods: {
                 changeTitle: function (event) {
