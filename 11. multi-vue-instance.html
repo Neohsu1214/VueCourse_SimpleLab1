@@ -1,0 +1,86 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <script src="vue.js"></script>
+
+    <div id="app1">
+        <h1>{{ title }}</h1>
+    </div>
+    <hr>
+    <div id="app2">
+        <h1>{{ title }}</h1>
+        <button @click="changeVM1">Change vm1 title!</button>
+    </div>
+    <hr>
+    <div id="app3">
+        <h1>{{ title }}</h1>
+    </div>
+</body>
+
+<script>
+    var vm1 = new Vue({
+        el: '#app1',
+        data: {
+            title: 'This is title for VM1!'
+        },
+        computed: {
+
+        },
+        watch: {
+
+        },
+        methods: {
+
+        }
+    });
+    var vm2 = new Vue({
+        el: '#app2',
+        data: {
+            title: 'This is title for VM2!'
+        },
+        computed: {
+
+        },
+        watch: {
+
+        },
+        methods: {
+            changeVM1: function() {
+                vm1.title = 'VM1 title is changed by VM2 Object!!!';
+            }
+        }
+    });
+
+    // 當宣告了變數承接 Vue instance後，一般的 javascript 也可以存取 Vue instance內的資料或功能了！
+    setTimeout(function() {
+        vm2.title = 'VM2\'s title is changed by outer timer!';
+    }, 3000);
+
+    // VueJS中的properties都會有 getter/setter包裝起來，所以如果從外部新增的property不會被getter/setter包裝而無法使用，所以不要從外部增加Vue裡的properties!!!
+    vm1.newData = "12345";
+    console.log(vm1); 
+
+    // 存取 Vue instance 內資料的方法除了直接使用 vm1.title 外，也可以使用 vm1.$data.title
+    console.log(vm1.title);
+    console.log(vm1.$data.title);
+
+    // 由一般的 javascript 指定物件到 Vue instance的方法
+    var dataForVue3 = {
+        title: 'Title for Vue3!'
+    };
+
+    var vm3 = new Vue({
+        el: '#app3',
+        data: dataForVue3
+    });
+
+    // 判斷兩者是否相同
+    console.log(vm3.$data === data);
+</script>
+
+
+</html>

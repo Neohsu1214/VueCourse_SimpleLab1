@@ -1,0 +1,45 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <script src="vue.js"></script>
+
+    <div id="app">
+        <hello>Inside of Vue instance! </hello>
+        <hello>No matter what content is</hello>
+    </div>
+    
+    <!-- 只有在Vue instance 中的才會被置換 -->
+    <hello>Out of Vue instance</hello>
+
+</body>
+
+<script>
+    // 要使 component 可被重複使用在Vue instance上，務必在 Vue instance 建立之前就先註冊好 component!!
+    Vue.component('hello', {
+        template: '<h1>Hello!</h1>'
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+
+        },
+        computed: {
+
+        },
+        watch: {
+
+        },
+        methods: {
+
+        }
+    });
+
+</script>
+
+
+</html>

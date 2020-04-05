@@ -1,0 +1,49 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <script src="vue.js"></script>
+
+    <div id="app">
+        <h1>{{ title}}</h1>
+    </div>
+
+
+    <div id="app2">
+
+    </div>
+</body>
+
+<script>
+    var vm = new Vue({
+        //el: '#app',
+        data: {
+            title: "This is a title!"
+        },
+        computed: {
+
+        },
+        watch: {
+
+        },
+        methods: {
+
+        }
+    });
+
+    // 透過事後註冊的方式，指定要把 Vue instance 註冊給哪一個 template 使用！
+    vm.$mount('#app');
+
+    
+    // 以下為超級不建議的用法
+    var vm2 = new Vue({
+        template: '<h1>Hello!</h1>'
+    });
+    document.getElementById('app2').appendChild(vm2.$el);
+</script>
+
+
+</html>

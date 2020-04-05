@@ -1,0 +1,41 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <script src="vue.js"></script>
+
+    <div id="app">
+        <h1>{{title}}</h1>
+        <!-- 透過主動指定 ref 的值，將 html 物件註冊到 Vue instance中使用！ -->
+        <h2 ref="h2Title"> This is title h2!</h2>
+        <button @click="btnClicked">Click Me!</button>
+    </div>
+
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            title: "This is title!"
+        },
+        computed: {
+
+        },
+        watch: {
+
+        },
+        methods: {
+            btnClicked: function() {
+                // Vue中要使用時，只需要加上 $refs 就能存取到了！
+                this.$refs.h2Title.innerText="Title h2 is changed!";
+            }
+        }
+    });
+</script>
+
+
+</html>

@@ -1,0 +1,45 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <script src="vue.js"></script>
+
+    <div id="app">
+        <button v-on:click="number++">Increase</button>
+        <button v-on:click="number--">Decrease</button>
+        <button v-on:click="number2++">Increase Second</button>
+        <p>Counter: {{ number }} | {{ number2 }}</p>
+        <!-- 宣告在 computed的好處： 對於要判斷後產出的資料，可以減少宣告計算的動作 -->
+        <p>Result {{ result() }} | {{ output }}</p>
+        <!-- 此 result() 用法，會導致只要有任何 DOM 物件有事件發生，就會觸發計算一次，詳見 console.log 的內容 -->
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                number: 0,
+                number2: 0
+            },
+            computed: {
+                // computed 顧名思義就是用來『即時運算』後輸出結果的，使用方法跟data依樣！
+                output: function() {
+                    console.log('computed!');
+                    return this.number > 5 ? 'Greater than 5' : ' Less than 5';
+                }
+            },
+            methods: {
+                result: function() {
+                    console.log('method!');
+                    return this.number > 5 ? 'Greater than 5' : ' Less than 5';
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

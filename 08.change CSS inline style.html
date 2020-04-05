@@ -1,0 +1,59 @@
+<html>
+
+<head>
+
+    <style>
+        .demo {
+            width: 100px;
+            height: 100px;
+            background-color: gray;
+            display: inline-block;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="vue.js"></script>
+
+    <div id="app">
+        <!-- 注意，原本 css style 的 backgroud-color ，在 vue判斷式中要改成 backgroundColor -->
+        <div class="demo" :style="{backgroundColor: color}"></div>
+
+        <hr>
+        <input type="text" v-model="color">
+        <input type="text" v-model="width">
+        <div class="demo" :style="myStyle"></div>
+        <!-- 順便複習一下 v-bind:attribute 可以用array定義多個， style 內容也是依樣 -->
+        <div class="demo" :style="[myStyle, {height: width+'px'}]"></div>
+
+    </div>
+
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            color: 'gray',
+            width: 100
+        },
+        computed: {
+            myStyle: function() {
+                return {
+                    backgroundColor: this.color,
+                    width: this.width + 'px'
+                }
+            }
+        },
+        watch: {
+
+        },
+        methods: {
+
+        }
+    });
+</script>
+
+
+</html>

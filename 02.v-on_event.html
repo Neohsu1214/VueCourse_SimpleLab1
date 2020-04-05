@@ -1,0 +1,64 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <div id="app">
+        <!-- 透過 v-on 將 template 中的資料，傳給 Vue 變數 -->
+        <!-- 相較於 v-bind 是將 Vue 變數傳遞給 template 顯示 -->
+        <button v-on:click="increase">Click</button>
+        <p>{{ number }}</p>
+        <p v-on:mousemove="updateCoordinates">
+            目前滑鼠座標: {{ x }} / {{ y }}
+            <!-- 當你不希望某些情況下發生事件時，可以在事件之後加上.stop，或者是給予 function 內實作 event.stopPropgation(); -->
+            - <span v-on:mousemove.stop="">DEAD SPOT</span>
+        </p>
+        <hr>
+        <!-- 當同時要傳入 value 跟 event 時，可以使用以下用法 -->
+        <button v-on:click="increaseBy(2, $event)">Click by 2</button>
+        <p>{{ number2 }}</p>
+        <!-- 當鍵盤鍵入特定按鈕時觸發事件，此範例是監聽 enter 或 space 按鈕 -->
+        <input type="text" v-on:keyup.enter.space="alertMe">
+
+        <hr>
+        <!-- Vue也能直接與javascript交互使用 -->
+        <button v-on:click="number3++">Click</button>
+        <p>{{ number3 * 2 }}</p>
+        <p>{{ (number3 * 2)>10 ? 'Greater than 10' : 'Less than 10'}}</p>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                number: 0,
+                x: 0,
+                y: 0,
+                number2: 0,
+                number3: 0
+            },
+            methods: {
+                increase: function () {
+                    this.number = this.number + 1;
+                },
+                updateCoordinates: function(event) {
+                    this.x = event.clientX;
+                    this.y = event.clientY;
+                },
+                increaseBy: function (step, event) {
+                    this.number2 = this.number2 + step;
+                }, 
+                alertMe: function() {
+                    alert('Alert! ');
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

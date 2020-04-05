@@ -1,0 +1,54 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <script src="vue.js"></script>
+
+    <div id="app">
+        <hello>Inside of Vue instance! </hello>
+        <hello>No matter what content is</hello>
+    </div>
+</body>
+
+<script>
+    // 要使 component 可被重複使用在Vue instance上，務必在 Vue instance 建立之前就先註冊好 component!!
+    // 注意：使用component後，data就必須改成 function 方式提供，以避免與 Vue instance 的 data 相互干擾
+    // 注意：若直接把data宣告在 component中，則會因為使用個別記憶體空間，所以資料不會互相影響。若要做到共用同一個記憶體空間，使得重複使用的component中，有一個改變資料，其他跟著被改變！！！則要將data中的資料要在外部定義後再指定進去 component，ex: 把 theData 指定到 component 的 data return
+    var theData = {
+        status: 'Critical'
+    }; 
+
+    // 註冊 Global component:  Vue.component('hello', {})
+    // 建立 Local component
+    var cmp = {
+        data: function() {
+            // 資料會一起改變
+            return theData
+            // 資料不會一起改變
+            /*return {
+                status: 'Critical'
+            }*/
+        },
+        template: '<h1>Hello Component {{ status }} (<button @click="changeStatus">Change Status</button>)</h1>',
+        methods: {
+            changeStatus: function() {
+                this.status = 'Normal';
+            }
+        },
+    };
+
+    new Vue({
+        el: '#app',
+        components: {
+            // 註冊 Local Component
+            'hello': cmp
+        }
+    });
+
+</script>
+
+
+</html>

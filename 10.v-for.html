@@ -1,0 +1,98 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <script src="vue.js"></script>
+
+    <div id="app">
+        <button @click="ingredients.push('spice')">Add a spice!</button>
+        v-for<br>
+        <ul>
+            <li v-for="ingredient in ingredients">{{ ingredient }}</li>
+        </ul>
+        <hr>
+        v-for with index<br>
+        <ul>
+            <li v-for="(ingredient,idx) in ingredients">{{ ingredient }} ({{ idx }})</li>
+        </ul>
+        <hr>
+        v-for and add key to list item<br>
+        <ul>
+            <li v-for="(ingredient, idx) in ingredients" :key="ingredient">{{ ingredient }} ({{ idx }})</li>
+        </ul>
+        <hr>
+        <!-- v-for 應用在非一般list元件時，必須要使用 template來達成 -->
+        v-for used on non-list elements<br>
+        <template v-for="(ingredient, index) in ingredients">
+            <h1>{{ ingredient }}</h1>
+            <p>{{ index }}</p>
+        </template>
+
+        <hr>
+        loop through whole k-v paired Objects and index!<br>
+        Level1:<br>
+        <ul>
+            <li v-for="person in persons">{{ person.name }}</li>
+        </ul>
+
+        Level2:<br>
+        <ul>
+            <li v-for="person in persons">
+                <span v-for="value in person">{{ value }}</span>
+            </li>
+        </ul>
+
+        Level3:<br>
+        <ul>
+            <li v-for="person in persons">
+                <div v-for="(value, key) in person">
+                    {{ key }}: {{  value }}
+                </div>
+            </li>
+        </ul>
+
+        Level4:<br>
+        <ul>
+            <li v-for="person in persons">
+                <div v-for="(value, key, index) in person">
+                    {{ key }}: {{  value }} ({{ index }})
+                </div>
+            </li>
+        </ul>
+
+        <hr>
+        v-for with number<br>
+        <ul>
+            <li v-for="n in 10">{{ n }}</li>
+        </ul>
+    </div>
+
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            ingredients: ['meat', 'fruit', 'cookies'],
+            persons: [
+                {name: 'Max', age: 27, color: 'red'},
+                {name: 'Anna', age: 'unknown', color: 'blue'}
+            ]
+        },
+        computed: {
+
+        },
+        watch: {
+
+        },
+        methods: {
+
+        }
+    });
+</script>
+
+
+</html>

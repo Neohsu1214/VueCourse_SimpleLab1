@@ -1,0 +1,65 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <script src="vue.js"></script>
+
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <!-- 由此例可看出 Vue的 Virtual DOM 更新機制，如果偵測到不需更新到DOM的話，就不會發出 beforeUpdate 與 updated -->
+        <button @click="title='Title Changed!'">Update Title</button>
+        <!-- 當按過之後，不論再按幾次，都不會再觸發 beforeDestroy 與 destroy，因為Vue instance 已經不見了 -->
+        <button @click="callDestroy">Destroy</button>
+    </div>
+
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            title: 'This is title!'
+        },
+        computed: {
+
+        },
+        watch: {
+
+        },
+        methods: {
+            callDestroy: function() {
+                this.$destroy();
+            }
+        },
+        beforeCreate() {
+            console.log('beforeCreate()');
+        },
+        created() {
+            console.log('created()');
+        },
+        beforeMount() {
+            console.log('beforeMount()');
+        },
+        mounted() {
+            console.log('mounted');
+        },
+        beforeUpdate() {
+            console.log('beforeUpdate');
+        },
+        updated() {
+            console.log('updated');
+        },
+        beforeDestroy() {
+            console.log('beforeDestroy');
+        },
+        destroyed() {
+            console.log('destroyed');
+        },
+    });
+</script>
+
+
+</html>

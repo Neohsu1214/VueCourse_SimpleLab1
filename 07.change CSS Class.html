@@ -1,0 +1,77 @@
+<html>
+
+<head>
+
+    <style>
+        .demo {
+            width: 100px;
+            height: 100px;
+            background-color: gray;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .green {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="vue.js"></script>
+
+    <div id="app">
+        <!-- 此範例說明 CSS Class也可以隨著Vue的事件而動態附加新的定義 -->
+        <!-- 但此 attribute binding 的內容很特別，第一次看到使用 {值: 判斷式是否成立} 的用法 -->
+        <!-- attr binding的css不會覆蓋掉原有的class而是附加上去 -->
+        <div class="demo" @click="attachRed = !attachRed" :class="{red: attachRed}"></div>
+
+        <!-- 可以將多個判斷式寫在一起 -->
+        <div class="demo" :class="{red: attachRed, blue: !attachRed}"></div>
+
+        <!-- 可以改用 computed 來避免同樣的東西不斷重複貼上，會造成日後維護的困難 -->
+        <div class="demo" :class="divClasses"></div>
+        <hr>
+        <!-- 此段算是複習一下 v-bind 的用法啦 -->
+        <input type="text" v-model="color">
+        <div class="demo" :class="color"></div>
+        <!-- v-bind:class 中的值也可以是array，更可以附加判斷式進來-->
+        <div class="demo" :class="[color, {red: attachRed}]"></div>
+    </div>
+
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            attachRed: false,
+            color: 'green'
+        },
+        computed: {
+            divClasses: function () {
+                return {
+                    red: this.attachRed,
+                    blue: !this.attachRed
+                }
+            }
+        },
+        watch: {
+
+        },
+        methods: {
+
+        }
+    });
+</script>
+
+
+</html>

@@ -1,0 +1,36 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <script src="vue.js"></script>
+
+    <div id="app">
+        <button v-on:click="changeLink">Click to change link</button>
+        <a v-bind:href="link">{{ link }}</a>
+        <hr>
+        <!-- 上面的 v-on:click 可以簡寫成 @click -->
+        <button @click="changeLink">Click to change link</button>
+        <!-- 上面的 v-bind:href 可以簡寫成 :href -->
+        <a :href="link">{{ link }}</a>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                link: 'http://google.com'
+            },
+            methods: {
+                changeLink: function(event) {
+                    this.link = 'http://apple.com'
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

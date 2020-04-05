@@ -1,0 +1,45 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <script src="vue.js"></script>
+
+    <div id="app">
+        <button @click="show = !show">Switch</button>
+        <p v-if="show">You can see me!<span>Hello!</span></p>
+        <!-- 有別於 v-if， v-show 只是把物件隱藏起來，可以透過觀察原始碼的方式觀看結果 -->
+        <p v-show="show">Now you see me...</p>
+        <p>Do you alse see me?</p>
+        
+        <!-- template 是 HTML5 才開始提供的，特別的地方在於 tempalte適用於置換內容用的，所以在網頁的檢視原始碼中，是看不到 template 的 tag -->
+        <!-- 也因此 v-show 無法作用在 template 上，以下的例子會發現無法隱藏 -->
+        <template v-show="show">
+            <h1>This is a title</h1>
+        </template>
+    </div>
+
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            show: true
+        },
+        computed: {
+
+        },
+        watch: {
+
+        },
+        methods: {
+
+        }
+    });
+</script>
+
+
+</html>
